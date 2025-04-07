@@ -1,101 +1,48 @@
 <!DOCTYPE html>
-<html lang="pt">
+<html lang="pt-br">
 <head>
-    <meta charset="UTF-8">
-    <title>Pagina de Aplicativo PWA</title>
-    <link rel="stylesheet" href="styles.css">
-    <!-- Inclue a biblioteca OpenLayers.js aqui -->
-    <script src="https://unpkg.com/openlayers@5.3.0/dist/ol.js"></script>
-    <style>
-        #map {
-            height: 400px;
-            width: 600px;
-            border: 1px solid black;
-        }
-    </style>
+    <base target="_top">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	
+	<title>sugesta</title>
+	
+	<link rel="shortcut icon" type="image/x-icon" href="sugesta/assets/leaflet/images/marker-icon.png" />
+    <link rel="stylesheet" href="/sugesta/assets/leaflet/leaflet.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+
+	<style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		.leaflet-container {
+			height: 800px;
+			width: 1200px;
+			max-width: 100%;
+			max-height: 100%;
+		}
+	</style>
+
+
+    
 </head>
 <body>
-    <div id="mapa"></div>
-    <div id="board">
-        <!-- Cellas do tabuleiro -->
-    </div>
-
-    // Crie o mapa aqui
-    var map = new ol.Map({
-        target: 'mapa',
-        layers: [
-            new ol.layer.Group({
-                source: new ol.source.Vector(),
-                style: function(feature) {
-                    return {
-                        image: 'url(/img/default.png)',
-                        pixelRatio: 1,
-                        filter: ol/filter as Function
-                    };
-                }
-            })
-        ]
-    });
-
-    // Adicione um layer de imagens aqui
-    var imageryLayer = new ol.layer.Image({
-        source: new ol.source.ImageService({
-            urlPrefix: '/img',
-            layer: 'openstreetmap-sea',
-            serverType: 'wfs'
-        }),
-        opacity: 0.5,
-        minZoom: 2,
-        maxZoom: 16
-    });
-
-    // Adicione o layer de imagens ao mapa aqui
-    map.addLayer(imageryLayer);
-
-    // Adicione um marcador aqui
-    var marker = new ol.Feature({
-        geometry: new ol.Geometry({
-            type: 'Point',
-            coordinates: [51.505, -0.09]
-        }),
-        properties: {
-            name: 'Marker'
-        },
-        style: function(feature) {
-            return {
-                image: 'url(/img/default.png)',
-                pixelRatio: 1,
-                filter: ol/filter as Function
-            };
-        }
-    });
-
-    // Adicione o marcador ao mapa aqui
-    map.addLayer(marker);
-
-    // Adicione um evento de clique para abrir a imagem associada ao marcador
-    var imageLayer = new ol.layer.Group({
-        source: new ol.source.Vector(),
-        style: function(feature) {
-            return {
-                image: 'url(/img/default.png)',
-                pixelRatio: 1,
-                filter: ol/filter as Function
-            };
-        }
-    });
-
-    map.on('click', function(event) {
-        var feature = event.feature;
-        if (feature && feature.getGeometry()) {
-            var url = '/img/' + feature.getProperties().name + '.jpg';
-            imageLayer.getSource().add(feature);
-            var img = document.createElement('img');
-            img.src = url;
-            var div = document.createElement('div');
-            div.appendChild(img);
-            alert(div.outerHTML);
-        }
-    });
+    <div id="map" style="width: 1200px; height: 800px;"></div>
+    <script src=".sugesta/assets/leaflet/leaflet.js"></script>
+    <script src="script.js"></script>
+    <style>
+		html, body {
+			height: 100%;
+			margin: 0;
+		}
+		.leaflet-container {
+			height: 800px;
+			width: 1200px;
+			max-width: 100%;
+			max-height: 100%;
+		}
+	</style>
 </body>
 </html>
