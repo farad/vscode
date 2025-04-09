@@ -1,0 +1,143 @@
+you:
+crie um aplicativo de mapa leaflet.js para ser deploy em netlify plano free.
+o aplicativo se chama "sugesta", ao iniciar peça permissão ao usuário para usar seus cookies, use os cookies para criar um id único e salve. 
+use openstreetmaps e inicie o mapa nas coordenadas -3.733 -38.738, zoom 11, zoom máximo 19, o mapa deve ter 800p de largura ou mais por 600p de altura, se possível ajuste a tela.
+no centro do mapa crie um polygon circle com um pop-up perguntanto se o usuário "deseja escrever algo"
+crie um layer com um elemento clicável sobre o circle. ao clicar dê um meio do usuário digitar texto, se possível usando funções do leaflet, use css e javascript caso não seja possível.
+Crie e salve uma variável com o texto digitado, após esse evento retire o polygon e o elemento clicável ou o próprio layer dele. 
+Atenção, tudo isso deve ser feito sem tocar no tilelayer de atribuição do openstreetmaps que deve estar presente. 
+
+conseguentemente getlocation e crie variáveis de latitude e logitude e use para criar um marker na geolocalização com um pop-up com o texto da variável de texto que foi criada anteriormente,
+ salve todas as variáveis junto da id para uso posterior. após isso. examine a database e crie markers para todas as id , nas suas respectivas localizações, com os respectivos textos.
+
+ assistant:
+ Para criar um aplicativo de mapa com Leaflet.js e deploy em Netlify plano free, siga os passos abaixo:
+
+1. Instale o pacote `leaflet` usando npm ou yarn:
+```bash
+npm install leaflet
+```
+ou
+```bash
+yarn add leaflet
+```
+
+2. Crie um novo arquivo de HTML para o seu aplicativo de mapa e adicione a biblioteca Leaflet:
+```html
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <title>Sugesta</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-hPkFj9XrXNaWY2ZCRJ5fQ4zG6yaF8uPzo4HtKB/MzNpdEhnHvEo7a6OQBAA1nMm3U0WTOUwK4yV4p5BOLdM9DxAYMh"
+        crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-HkDQzCEwaxYHtTmP+0jE+OtXyVbC6u2W8v3rJGP30oXpFeAPzIhMnJ6piU6pe4zIz4y7OxN5uLsTTKfZUw=="
+            crossorigin=""></script>
+</head>
+<body>
+    <div id="map" style="width: 800px; height: 600px;"></div>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-HkDQzCEwaxYHtTmP+0jE+OtXyVbC6u2W8v3rJGP30oXpFeAPzIhMnJ6piU6pe4zIz4y7OxN5uLsTTKfZUw=="
+            crossorigin=""></script>
+    <style>
+        #map {
+            border: 1px solid black;
+        }
+    </style>
+</body>
+</html>
+```
+
+3. Adicione o código JavaScript para criar o mapa e adicionar os elementos desejados:
+```javascript
+let map = L.map('map').setView([-3.733, -38.738], 11);
+L.tileLayer('https://tile.openstreetmap.org/{s}/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>',
+}).addTo(map);
+
+let circle = L.circle([-3.733, -38.738], 11).addTo(map);
+circle.on('click', () => {
+    let input = document.createElement('input');
+    input.type = 'text';
+    input.style.position = 'absolute';
+    input.style.top = '50%';
+    input.style.left = '50%';
+    input.style.transform = 'translate(-50%, -50%)';
+    input.style.width = '200px';
+    input.style.height = '40px';
+    document.body.appendChild(input);
+    input.focus();
+    let text = input.value;
+    // Salve o texto aqui
+    circle.remove();
+});
+
+let markerLayer = L.layerGroup().addTo(map);
+
+// Salve a latitude e longitude aqui
+
+map.on('click', (e) => {
+    if (e.latlng.lat === latitude && e.latlng.lng === longitude) {
+        let input = document.createElement('input');
+        input.type = 'text';
+        input.style.position = 'absolute';
+        input.style.top = '50%';
+        input.style.left = '50%';
+        input.style.transform = 'translate(-50%, -50%)';
+        input.style.width = '200px';
+        input.style.height = '40px';
+        document.body.appendChild(input);
+        input.focus();
+        let text = input.value;
+        // Salve o texto aqui
+        markerLayer.removeLayer(L.marker([e.latlng.lat, e.latlng.lng], {
+            icon: L.icon({
+                url: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+                size: 25,
+                iconAnchor: [12, 12],
+                popupAnchor: [-2, -4]
+            }),
+            title: text
+        }));
+    }
+});
+
+// Salve a id aqui
+
+map.on('zoom', () => {
+    if (map.getZoom() > 19) {
+        map.closePopup();
+    }
+});
+```
+
+4. Crie um novo arquivo de CSS para estilizar o aplicativo:
+```css
+body {
+    font-family: Arial, sans-serif;
+}
+
+#map {
+    border: 1px solid black;
+}
+```
+
+5. Salve todos os arquivos em uma pasta e subira para o seu repositório Git.
+6. Crie um novo arquivo de configuração para o seu aplicativo de mapa no Netlify:
+```yaml
+name: Sugesta
+domain: sugesta.netlifyapp.com
+build:
+  command: npm run build
+  publish:
+    dir: .
+```
+
+7. Suba o seu repositório Git para o Netlify e configure as opções de deploy.
+8. Acesse o seu aplicativo de mapa no Netlify e verifique se tudo está funcionando corretamente.
+
+Lembre-se de que você precisará criar uma conta no OpenStreetMap para usar os tiles de mapas. 
+Além disso, é importante lembrar que a biblioteca Leaflet.js não suporta o uso de cookies para identificar os usuários, 
+então você precisará encontrar outra maneira de armazenar as informações de usuário.
