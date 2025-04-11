@@ -13,6 +13,7 @@ const tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 //    attribution: '&lt;A&gt; Hoteis Tasmania &lt;/A&gt;',
 //}).addTo(map);
 
+
 // Obter a localização do usuário
 navigator.geolocation.getCurrentPosition(position => {
     const lat = position.coords.latitude;
@@ -21,9 +22,12 @@ navigator.geolocation.getCurrentPosition(position => {
     // criar marcador na localização
     var marker = L.marker([lat, lng]).addTo(map);
                 L.marker([lat, lng]).setOptions({ icon: iconPath('marker.sugesta/assets/leaflet/images/marker-icon.png') }).addTo(map);
+   
 
     
 })
+;
+
 // Centralizar o mapa na localização do usuário
 navigator.geolocation.getCurrentPosition(position => {
     const lat = position.coords.latitude;
@@ -33,4 +37,13 @@ navigator.geolocation.getCurrentPosition(position => {
 
 })
 ;
+// criar um círculo com pop-up "quer escrever algo aqui?"
+const circle = L.circleMarker([-3.790, -38.555], {
+    color: 'yellow',
+    fillcolor: '#f03',
+    fillOpacity: 0.5,
+    radius: 150,
+    }).addTo(map);
+    circle.bindPopup("I am a circle.").addTo(map);
+
 //setView([-3.731, -38.521] fortaleza

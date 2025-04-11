@@ -1,0 +1,13 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#map {
+    border: 1px solid black;
+}
+.leaflet-container {
+    width: 800px;
+    height: 600px;
+    border: 1px solid black;
+    margin: auto;
+}

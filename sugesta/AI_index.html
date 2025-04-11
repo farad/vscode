@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <!-- o assistente gera um sha512 diferente a cada interação, e nenhum funciona, o dev edita manual o link rel= para um funcional-->
+    <meta charset="UTF-8">
+    <title>Sugesta</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="anonymous"/>
+    <!-- <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css"
+        integrity="sha512-hPkFj9XrXNaWY2ZCRJ5fQ4zG6yaF8uPzo4HtKB/MzNpdEhnHvEo7a6OQBAA1nMm3U0WTOUwK4yV4p5BOLdM9DxAYMh"
+        crossorigin=""/> -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin="anonymous"></script>
+    <!-- <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-HkDQzCEwaxYHtTmP+0jE+OtXyVbC6u2W8v3rJGP30oXpFeAPzIhMnJ6piU6pe4zIz4y7OxN5uLsTTKfZUw=="
+            crossorigin=""></script> -->
+
+    <!-- vamos linkar script e ccs> que o assistente esqueceu pois os escreveu depois de ter escrito o html --> 
+    <link rel="stylesheet" href="sugesta/AI_styles.css"
+        crossorigin="anonymous"/>
+    <script src="sugesta/AI_script.js"
+        crossorigin=""></script>
+
+        <style>
+            .leaflet-container {
+                width: 800px;
+                height: 600px;
+                border: 1px solid black;
+                margin: auto;
+            }
+        </style>
+
+</head>
+<body>
+    <!-- <div id="map" style="width: 800px; height: 600px;"></div> -->
+    <div class="leaflet-container" id="map"></div>
+    <script src="sugesta/AI_script.js"></script>
+    <!-- <script src="https://cdn.jsdelivr.net/npm/leaflet@1.7.1/dist/leaflet.js"
+            integrity="sha512-HkDQzCEwaxYHtTmP+0jE+OtXyVbC6u2W8v3rJGP30oXpFeAPzIhMnJ6piU6pe4zIz4y7OxN5uLsTTKfZUw=="
+            crossorigin=""></script> -->
+    <!--o dev solicitou um style melhorado-->
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        
+        .leaflet-container {
+            width: 800px;
+            height: 600px;
+            border: 1px solid black;
+            margin: auto;
+        }
+    </style>
+ 
+</body>
+</html>
