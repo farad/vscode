@@ -18,13 +18,18 @@
 			margin: 0;
 		}
 		.leaflet-container {
-			height: 800px;
-			width: 1200px;
+			height: 400px;
+			width: 600px;
 			max-width: 100%;
 			max-height: 100%;
 		}
 	</style>
-
+<form method="POST" data-netlify="true">
+    <label>Your Name: <input type="text" name="name" /></label>
+    <label>Your Email: <input type="email" name="email" /></label>
+    <label>Message: <textarea name="message"></textarea></label>
+    <button type="submit">Send</button>
+  </form>
 
     
 </head>
