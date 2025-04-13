@@ -8,45 +8,56 @@
 	<title>sugesta</title>
 	
 	<link rel="shortcut icon" type="image/x-icon" href="sugesta/assets/leaflet/images/marker-icon.png" />
-    <link rel="stylesheet" href="/sugesta/assets/leaflet/leaflet.css">
+    <!-- <link rel="stylesheet" href="/sugesta/assets/leaflet/leaflet.css"> -->
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
 	<style>
-		html, body {
-			height: 100%;
-			margin: 0;
-		}
-		.leaflet-container {
-			height: 400px;
-			width: 600px;
-			max-width: 100%;
-			max-height: 100%;
-		}
-	</style>
-<form method="POST" data-netlify="true">
-    <label>Your Name: <input type="text" name="name" /></label>
-    <label>Your Email: <input type="email" name="email" /></label>
-    <label>Message: <textarea name="message"></textarea></label>
-    <button type="submit">Send</button>
-  </form>
+        body {
+            margin: 0;
+            height: 100vh; /* Full viewport height */
+            position: relative; /* Make this container relatively positioned to be used as a reference point for absolute positioning its children. Not necessary if the div is direct child of body which is already relative by default. */
+        }
+
+        #map {
+            width: 600px;
+            height: 400px;
+            position: absolute; /* Makes the map positioned absolutely relative to its parent container (body in this case) */
+            top: 50%;           /* Pushes it down so that its center point meets the middle of parent. Then we adjust with transform property below. */
+            left: 50%;
+            transform: translate(-50%, -50%); /* Moves map up and left by half its own dimensions, effectively centering it within its container. */
+            border: 2px solid black; /* Just to see the boundaries - remove this in your final version */
+        }
+		#form-container {
+            width: 600px;
+            height: auto; /* Height will adjust based on form size */
+            margin: 20px auto; /* Center horizontally and add some vertical padding/margin */
+            border: 0px solid black; 
+            padding: 20px;
+		} 
+		.center-heading {
+            text-align: center; /* CSS way to align text in the middle */
+            color: darkblue;    /* Optional styling for subheadings */
+        } 
+    </style>
+
+
 
     
 </head>
 <body>
-    <div id="map" style="width: 1200px; height: 800px;"></div>    
+
+	<h1><center>Seguidor? Okay, se é assim que você se sente <br>nos siga de um distância segura,
+		 mas espero que um dia você possa andar ao nosso lado.</center></h1>
+		 <h2 class="center-heading">Não sabe como chegou aqui? Tudo bem, eu também não sei,<br> inscreva-se para receber infalivelmente por email atualizações de como vamos sair dessa.</h2> 
+	<div id="form-container"><form method="POST" data-netlify="true">
+		<label>Your Name: <input type="text" name="name" /></label>
+		<label>Your Email: <input type="email" name="email" /></label>
+		<label>Message: <textarea name="message"></textarea></label>
+		<button type="submit">Send</button>
+	  </form></div><br>
+    <div id="map" style="width: 600px; height: 400px;"></div>    
     <script src="script.js"></script>
-    <style>
-		html, body {
-			height: 100%;
-			margin: 0;
-		}
-		.leaflet-container {
-			height: 800px;
-			width: 1200px;
-			max-width: 100%;
-			max-height: 100%;
-		}
-	</style>
+   
+
 </body>
 </html>
